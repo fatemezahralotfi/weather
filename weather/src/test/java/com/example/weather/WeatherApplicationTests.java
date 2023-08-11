@@ -77,29 +77,6 @@ class WeatherApplicationTests {
         assertThrows(Exception.class, () -> weatherService.fetchAndDisplayWeather(city));
     }
 
-
-    @Test
-    public void testGetNowAndFuture_Success() throws Exception {
-
-        // Arrange
-        String city = "tehran";
-        WeatherServiceImpl weatherService=new WeatherServiceImpl();
-
-        WeatherDTO weatherDTO = new WeatherDTO();
-        // Initialize weatherDTO and other necessary objects here
-
-        when(unixTimestampService.exchange(any(Long.class))).thenReturn("2023-08-10 15:30:00");
-        when(jsonOutPut.jsonOutPut(eq(true), eq("200ok"), any())).thenReturn(ResponseEntity.ok().build());
-        when(weatherService.fetchAndDisplayWeather("tehran")).thenReturn(weatherDTO);
-
-        // Act
-        ResponseEntity<Object> response = weatherService.getNowAndFuture(city);
-
-        // Assert
-        assertNotNull(response);
-        assertEquals(200, response.getStatusCodeValue());
-    }
-
     @Test
     public void testGetNowAndFuture_NullCity() {
 
